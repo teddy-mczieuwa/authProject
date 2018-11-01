@@ -5,7 +5,7 @@ const authRoutes = (User) => {
     const authController = require('../controllers/authController')(User)
 
     authRouter.route('/')
-    .get(authController.getAll)
+    .post(authController.signIn)
 
     return authRouter
 }
