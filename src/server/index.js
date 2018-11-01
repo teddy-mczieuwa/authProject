@@ -18,6 +18,7 @@ mongoose.connect(customConfig.mongoURI, {"useNewUrlParser": true},
 })
 
 const authRouter = require('./routes/authRoutes')(User)
+const userRouter = require('./routes/userRoutes')()
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 app.use('/auth', authRouter)
+app.use('/', userRouter)
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

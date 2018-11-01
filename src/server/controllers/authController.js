@@ -7,7 +7,7 @@ const createToken = (user) => {
 }
 
 const authController = (User) => {
-    const signIn = (req, res) => {
+    const signUp = (req, res) => {
 
         const email = req.body.email
         const password = req.body.password
@@ -40,8 +40,19 @@ const authController = (User) => {
         
     }
 
+    const signIn = (req, res) => {
+        res.json({token: createToken(req.user)})
+    }
+
+
+    const logout = (req, res) => {
+        req.logout()
+        res.json(req.user)
+    }
     return {
-        signIn
+        signIn,
+        signUp,
+        logout
     }
 }
 
