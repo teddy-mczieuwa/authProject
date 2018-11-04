@@ -1,4 +1,7 @@
 const express = require('express')
+const passport  = require('passport')
+require('../services/passport')
+const requireSignin = passport.authenticate('local', {session: false})
 
 const authRoutes = (User) => {
     const authRouter = express.Router()
@@ -8,7 +11,7 @@ const authRoutes = (User) => {
     .post(authController.signUp)
 
     authRouter.route('/signin')
-    .post(authController.signIn)
+    .post(requireSignin, authController.signIn)
 
     authRouter.route('/logout')
     .get(authController.logout)
